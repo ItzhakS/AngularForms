@@ -12,8 +12,9 @@ export class AppComponent {
   topics = ['BAseball','Angular','Buttons','Windows','Linux'];
 
   topicHasError = true;
+  submitted = false;
 
-  userModel = new User('Rob','a@a.com', 1234543, "default", 'morning', true);
+  userModel = new User('','', 0, "", '', true);
 
   constructor(private _enrollmentService:EnrollService){}
 
@@ -23,10 +24,15 @@ export class AppComponent {
   }
 
   onSubmit(){
+    this.submitted = true;
     this._enrollmentService.enroll(this.userModel)
     .subscribe(
-      data => console.log('Success', data),
-      error => console.log('Error', error)
+      data => console.log('Success!', data),
+      error => console.log('Error!', error)
       )
+  }
+
+  newForm(){
+    this.submitted = false;
   }
 }
